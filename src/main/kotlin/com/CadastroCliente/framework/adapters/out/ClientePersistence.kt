@@ -23,7 +23,7 @@ class ClientePersistence: ClientePortOut {
         return clienteRepository?.findAllByNomeContains(nome)
     }
 
-    override fun getNotasPorId(id: String?): Cliente? {
+    override fun getClientePorId(id: String?): Cliente? {
        return id?.let { clienteRepository?.findById(it)?.get() }
     }
 }

@@ -5,12 +5,15 @@ import com.CadastroCliente.application.out.ClientePortOut
 import com.CadastroCliente.domain.Cliente
 import com.CadastroCliente.framework.adapters.out.ClienteRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class ClienteService : ClienteUseCase{
     @Autowired
     var clientePortOut: ClientePortOut? = null
 
     override fun SaveCliente(cliente: Cliente?): Cliente? {
+
        return clientePortOut?.SaveCliente(cliente)
     }
 
@@ -22,7 +25,8 @@ class ClienteService : ClienteUseCase{
         return clientePortOut?.getClientePorNome(nome)
     }
 
-    override fun getNotasPorId(id: String?): Cliente? {
-        return clientePortOut?.getNotasPorId(id)
+    override fun getClientePorId(id: String?): Cliente? {
+        return clientePortOut?.getClientePorId(id)
     }
+
 }
