@@ -3,7 +3,7 @@ package com.CadastroCliente.framework.errors
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class Error {
+class Error(code: String?, reason: String?, message: String?, status: Int?) {
     private val serialVersionUID = -3098212556060809862L
 
     @JsonProperty(value = "code", required = true)
@@ -35,21 +35,12 @@ class Error {
     @JsonProperty(value = "@type", required = false)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private val type: String? = null
-    /*
-    fun Error() {
-        super()
-    }
-    */
-    fun Error(code: String?, reason: String?, status: Int?) {
-        this.code = code
-        this.reason = reason
-        this.status = status
+
+    init {
+            this.code = code
+            this.reason = reason
+            this.message = message
+
     }
 
-    fun Error(code: String?, reason: String?, message: String?, status: Int?) {
-        this.code = code
-        this.reason = reason
-        this.message = message
-        this.status = status
-    }
 }
