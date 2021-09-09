@@ -1,11 +1,7 @@
 # KotlinHexagonalBackEnd
 Projeto para teste de arquitetura hexagonal com Kotlin. </br> 
-Nele implemento testes com relatório de cobertura , </br>
-autenticação via Interceptor . </br>
-O Projeto será um cadastro de Clientes com objetos separados para </br>
-os endereços e contatos. 
-</br>
-
+*Autenticação via Interceptor . </br>
+*Listagem com filtros especificos. </br></br>
 Requisitos: </br>
 *MongoDB </br>
 *Java11 </br>
