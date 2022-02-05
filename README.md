@@ -12,6 +12,9 @@ Requisitos: </br>
 </br>
 <img src="swagger.png"> </br>
 
+-ControllerAdvice
+</br>
+<img src="ee.png"> </br>
 <h3> Segue os exemplo de curl das funções do microsserviço</h3>
 </br>
 [POST] </br>

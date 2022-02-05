@@ -1,6 +1,7 @@
 package com.CadastroCliente.framework.adapters.out
 
 import com.CadastroCliente.application.out.ClientePortOut
+import com.CadastroCliente.config.controller_advice.exceptions.NotFoundException
 import com.CadastroCliente.domain.Cliente
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -16,6 +17,9 @@ class ClientePersistence: ClientePortOut {
     }
 
     override fun getCliente(): List<Cliente?>? {
+        if(clienteRepository?.findAll()?.size==0){
+            throw NotFoundException("Nenhum registro encontrado")
+        }
         return clienteRepository?.findAll()
     }
 
