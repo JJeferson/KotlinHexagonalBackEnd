@@ -17,9 +17,7 @@ class ClientePersistence: ClientePortOut {
     }
 
     override fun getCliente(): List<Cliente?>? {
-        if(clienteRepository?.findAll()?.size==0){
-            throw NotFoundException("Nenhum registro encontrado")
-        }
+
         return clienteRepository?.findAll()
     }
 
@@ -28,6 +26,11 @@ class ClientePersistence: ClientePortOut {
     }
 
     override fun getClientePorId(id: String?): Cliente? {
-       return id?.let { clienteRepository?.findById(it)?.get() }
+            var consulta = id.let { it?.let { it1 -> clienteRepository!!.findById(it1) } }
+            if(consulta?.isEmpty == true) {
+                throw NotFoundException("Nenhum registro encontrado")
+            }
+            return  consulta?.get()
     }
+
 }
