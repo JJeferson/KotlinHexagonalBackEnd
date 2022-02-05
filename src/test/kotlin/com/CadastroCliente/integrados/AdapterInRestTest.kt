@@ -42,6 +42,62 @@ class AdapterInRestTest {
 
 
     @Test
+    fun listaClientePorNomeTest404(){
+        var nomeTeste = "teste"
+        val testeInsercao = alimentaObj()
+        testeInsercao.nome=nomeTeste
+        clienteRepository?.save(testeInsercao)
+        nomeTeste=nomeTeste+"aaaa"
+
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_JSON
+        headers["Authorization"] = "MTIzNjU0Nzg5"
+
+        mockMvc!!.perform(
+            MockMvcRequestBuilders.get("/api//lista_cliente_por_nome?nome=$nomeTeste").
+            contentType("application/json").
+            headers(headers)).
+        andExpect(MockMvcResultMatchers.status().`is`(404))
+        clienteRepository?.delete(testeInsercao)
+    }
+
+    @Test
+    fun listaClientePorNomeTestok(){
+        var nomeTeste = "teste"
+        val testeInsercao = alimentaObj()
+        testeInsercao.nome=nomeTeste
+        clienteRepository?.save(testeInsercao)
+
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_JSON
+        headers["Authorization"] = "MTIzNjU0Nzg5"
+
+        mockMvc!!.perform(
+            MockMvcRequestBuilders.get("/api//lista_cliente_por_nome?nome=$nomeTeste").
+            contentType("application/json").
+            headers(headers)).
+        andExpect(MockMvcResultMatchers.status().`is`(200))
+        clienteRepository?.delete(testeInsercao)
+    }
+
+
+    @Test
+    fun findbyidTest412(){
+        val testeInsercao = alimentaObj()
+        clienteRepository?.save(testeInsercao)
+
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_JSON
+        headers["Authorization"] = "MTIzNjU0Nzg5"
+
+        mockMvc!!.perform(
+            MockMvcRequestBuilders.get("/api/findbyid?id=").
+            contentType("application/json").
+            headers(headers)).
+        andExpect(MockMvcResultMatchers.status().`is`(412))
+        clienteRepository?.delete(testeInsercao)
+    }
+    @Test
     fun findbyidTest404(){
         var idValido="11aa"
         val testeInsercao = alimentaObj()

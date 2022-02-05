@@ -22,7 +22,11 @@ class ClientePersistence: ClientePortOut {
     }
 
     override fun getClientePorNome(nome: String?): List<Cliente?>? {
-        return clienteRepository?.findAllByNomeContains(nome)
+        var consulta =  clienteRepository?.findAllByNomeContains(nome)
+        if(consulta?.size == 0) {
+            throw NotFoundException("Nenhum registro encontrado")
+        }
+        return  consulta
     }
 
     override fun getClientePorId(id: String?): Cliente? {
