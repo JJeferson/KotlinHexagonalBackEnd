@@ -1,14 +1,15 @@
 package com.CadastroCliente.framework.adapters.`in`.rest
 
 import com.CadastroCliente.application.`in`.ClienteUseCase
-import com.CadastroCliente.application.out.ClientePortOut
 import com.CadastroCliente.domain.Cliente
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiResponse
+import io.swagger.annotations.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
-import java.util.ArrayList
 
 @RestController
 @RequestMapping(value = ["/api"])
@@ -27,6 +28,12 @@ class ClienteRest {
 
 
     @RequestMapping(value = ["/findbyid"], method = [RequestMethod.GET])
+    @ApiOperation(value = "Localiza pelo ID")
+    @ApiResponses(
+        value = [ApiResponse(code = 200, message = "ok"),
+            ApiResponse(code = 500,message = "Internal Server Error"),
+            ApiResponse(code = 404, message = "Not Found")]
+    )
     fun findbyid(@RequestParam(value = "id", required = false, defaultValue = "0") id: String)
     : ResponseEntity<Cliente?>? {
         return if (id == "0") {
@@ -41,6 +48,12 @@ class ClienteRest {
 
 
     @RequestMapping(value = ["/lista_cliente_por_nome"], method = [RequestMethod.GET])
+    @ApiOperation(value = "Localiza por nome")
+    @ApiResponses(
+        value = [ApiResponse(code = 200, message = "ok"),
+            ApiResponse(code = 500,message = "Internal Server Error"),
+            ApiResponse(code = 404, message = "Not Found")]
+    )
     fun listaClientePorNome(@RequestParam(value = "nome", required = false, defaultValue = "0")
                                nome: String): ResponseEntity<List<Cliente?>>? {
         if (nome.equals("0")) {

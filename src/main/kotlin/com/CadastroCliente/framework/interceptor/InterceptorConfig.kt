@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
-import com.CadastroCliente.framework.interceptor.AuthInterceptor
 
 @Configuration
 class InterceptorConfig : WebMvcConfigurerAdapter() {
@@ -25,8 +24,8 @@ class InterceptorConfig : WebMvcConfigurerAdapter() {
 
         requestHandler()?.let {
             registry.addInterceptor(it).excludePathPatterns(
-                "/healthcheck" //aqui é pra pro excessões , endpoints publicos
-        )
+
+            )
         }
 
     }

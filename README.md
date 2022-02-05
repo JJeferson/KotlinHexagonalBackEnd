@@ -7,6 +7,10 @@ Requisitos: </br>
 *Java11 </br>
 *Maven </br>
 
+</br></br>
+-Swagger: http://localhost:8080/swagger-ui.html
+</br>
+<img src="swagger.png"> </br>
 
 <h3> Segue os exemplo de curl das funções do microsserviço</h3>
 </br>

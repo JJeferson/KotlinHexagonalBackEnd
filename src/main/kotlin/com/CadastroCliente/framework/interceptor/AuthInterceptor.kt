@@ -19,8 +19,15 @@ class AuthInterceptor(TokenFixo: String?) : HandlerInterceptor {
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val authorization = request.getHeader("Authorization")
+        if(request.requestURL.contains("swagger-ui")||
+            request.requestURL.contains("swagger-resources")||
+            request.requestURL.contains("v2/api-docs")||
+            request.requestURL.contains("webjars")){
+          return true
+        }
+
         try {
-            if (authorization == null) {
+           if (authorization == null) {
                 val error = Error("401", "Unauthorized Request",
                         "Precisa informar um header Authorization", 1)
                 response.writer.write(Gson().toJson(error))
@@ -28,6 +35,7 @@ class AuthInterceptor(TokenFixo: String?) : HandlerInterceptor {
                 response.contentType = "application/json"
                 return false
             }
+
             val tokenDecoded = Base64.getDecoder().decode(authorization)
             val tokenComoString = String(tokenDecoded)
             if (tokenComoString != token) {
@@ -57,6 +65,7 @@ class AuthInterceptor(TokenFixo: String?) : HandlerInterceptor {
             response.contentType = "application/json"
             return false
         }
+
         return true
     }
 
